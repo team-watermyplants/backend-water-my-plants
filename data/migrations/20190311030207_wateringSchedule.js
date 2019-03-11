@@ -1,14 +1,15 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable("wateringSchedule", table => {
+  return knex.schema.createTable("watering", table => {
+    table.increments();
     table
-      .integer("Plant ID")
+      .integer("plantId")
       .references("id")
-      .inTable("plants")
-      .notNullable();
-    table.integer("Watering Interval (in days)").notNullable();
+      .inTable("plants");
+    table.datetime("wateringTime").notNullable();
+    table.boolean("smsDelivered").defaultTo(false);
   });
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTableIfExists("wateringSchedule");
+  return knex.schema.dropTableIfExists("watering");
 };
