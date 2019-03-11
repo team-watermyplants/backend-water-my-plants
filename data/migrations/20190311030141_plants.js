@@ -5,8 +5,7 @@ exports.up = function(knex, Promise) {
     table.string("location", 255);
     table.text("description");
     table.string("plantURL");
-    table.integer("userId").references('id').inTable('users').noNullable()
-
+    table.integer("userId").references('id').inTable('users');
   });
 };
 
