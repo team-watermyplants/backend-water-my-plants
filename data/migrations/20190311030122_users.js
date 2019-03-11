@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
       .notNullable()
       .unique();
     table.string("password", 255).notNullable();
-    table.string("phoneNumber", 255);
+    table.string("phoneNumber", 255).notNullable();
     table.string("profileURL");
   });
 };

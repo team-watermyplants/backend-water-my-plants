@@ -1,9 +1,12 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable("plants", table => {
     table.increments();
-    table.string("commonName", 255).notNullable();
-    table.string("species", 255).notNullable();
-    table.string("imgURL");
+    table.string("name", 255).notNullable();
+    table.string("location", 255);
+    table.text("description");
+    table.string("plantURL");
+    table.integer("userId").references('id').inTable('users').noNullable()
+
   });
 };
 
