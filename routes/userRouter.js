@@ -15,6 +15,7 @@ router.get('/:id/plants', validateUser, getUserPlants)
 
 //* Route Handlers
 function findUsers (req, res, next) {
+  console.log('\nREQ.USER', req.user)
   db('user')
     .then(users => {
       res.status(200).json({ user: req.user, users })

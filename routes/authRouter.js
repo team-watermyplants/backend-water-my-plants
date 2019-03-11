@@ -11,7 +11,13 @@ const generateToken = require('../utils/generateToken')
 const checkCredentials = require('../middleware/checkCredentials')
 
 //* Email/Password-Hash Strategy
-router.post('/register', checkCredentials, register)
+router.post(
+  '/register',
+  checkCredentials,
+  register,
+  passport.authenticate('local'),
+  login
+)
 router.post('/login', checkCredentials, passport.authenticate('local'), login)
 
 //* Destroy cookie session & req.user
@@ -73,7 +79,8 @@ function register (req, res, next) {
             .then(user => {
               const token = generateToken(user)
               req.session.token = token
-              res.status(201).json({ msg: 'Registration Successful!' })
+              next()
+              // res.status(201).json({ msg: 'Registration Successful!' })
             })
         } else {
           const user = {
@@ -85,7 +92,8 @@ function register (req, res, next) {
           db('user').insert(user).returning('*').then(user => {
             const token = generateToken(user)
             req.session.token = token
-            res.status(201).json({ msg: 'Registration Successful!' })
+            next()
+            // res.status(201).json({ msg: 'Registration Successful!' })
           })
         }
       })
