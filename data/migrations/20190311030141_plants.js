@@ -8,7 +8,6 @@ exports.up = function(knex, Promise) {
     table.integer("userId")
       .references('id')
       .inTable('users')
-      .noNullable()
       .onDelete('CASCADE');
   });
 };
