@@ -1,9 +1,10 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable("watering", table => {
+  return knex.schema.createTable("notifications", table => {
     table.increments();
-    table.datetime("wateringTime");
+    table.datetime("notificationsTime");
     table.boolean("smsDelivered").defaultTo(false);
-    table.integer("plantId")
+    table
+      .integer("plantId")
       .references("id")
       .inTable("plants")
       .onDelete("CASCADE");
@@ -11,5 +12,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTableIfExists("watering");
+  return knex.schema.dropTableIfExists("notifications");
 };
