@@ -3,11 +3,10 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.datetime("wateringTime");
     table.boolean("smsDelivered").defaultTo(false);
-    table
-    .integer("plantId")
-    .references("id")
-    .inTable("plants")
-    .onDelete("CASCADE");
+    table.integer("plantId")
+      .references("id")
+      .inTable("plants")
+      .onDelete("CASCADE");
   });
 };
 
