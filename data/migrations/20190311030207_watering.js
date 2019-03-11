@@ -4,8 +4,9 @@ exports.up = function(knex, Promise) {
     table
       .integer("plantId")
       .references("id")
-      .inTable("plants");
-    table.datetime("wateringTime").notNullable();
+      .inTable("plants")
+      .onDelete("CASCADE");
+    table.datetime("wateringTime");
     table.boolean("smsDelivered").defaultTo(false);
   });
 };
