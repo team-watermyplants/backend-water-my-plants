@@ -64,4 +64,6 @@ router.delete("/:id", (req, res) => {
     .catch(() => res.status(500).json({ message: "server error" }));
 });
 
+//all notifications for a specific user
+//all plants for a specific user nested inside of user.
 module.exports = router;
