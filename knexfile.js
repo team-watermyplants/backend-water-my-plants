@@ -5,6 +5,7 @@ module.exports = {
       filename: "./data/waterPlantsDB.db3"
     },
     useNullAsDefault: true,
+    debug: true,
     migrations: {
       directory: "./data/migrations"
     },

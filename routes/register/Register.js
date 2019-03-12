@@ -24,7 +24,10 @@ function checkRegistration(req, res, next) {
 }
 
 function hashPassword(req, res, next) {
-  req.body.password = bcrypt.hashSync(req.body.password, 12);
+  req.body.password = bcrypt.hashSync(
+    req.body.password,
+    process.env.HASH_ROUNDS
+  );
   next();
 }
 
