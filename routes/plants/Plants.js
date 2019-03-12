@@ -78,4 +78,5 @@ router.delete("/:id", (req, res) => {
     .catch(() => res.status(500).json({ message: "server error" }));
 });
 
+//all notifications for specific plant
 module.exports = router;
