@@ -21,7 +21,7 @@ function authenticate(req, res, next) {
 
 function generateToken(user) {
   const payload = {
-    username: user.username
+    id: user.id
   };
 
   const secret = process.env.JWT_SECRET;
