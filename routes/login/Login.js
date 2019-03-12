@@ -47,8 +47,4 @@ router.post("/", checkLogin, findUser, checkPassword, async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
-  let users = await db("users");
-  res.status(200).json(users);
-});
 module.exports = router;

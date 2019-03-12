@@ -8,6 +8,22 @@ router.get("/", async (req, res) => {
   res.status(200).json(plants);
 });
 
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  db("plants")
+    .where({ userId: id })
+    .then(plant => {
+      if (plant.length === 0) {
+        res
+          .status(400)
+          .json({ message: "There are no plants associated with that id." });
+      } else {
+        res.status(200).json(plant);
+      }
+    })
+    .catch(err => res.status(500).json(err));
+});
+
 router.post("/", (req, res) => {
   const { name, location, description, plantURL, userId } = req.body;
   if (!name || name.trim().length === 0) {
