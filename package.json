@@ -2,7 +2,8 @@
   "scripts": {
     "test": "cross-env DB_ENV=testing jest --watchAll --verbose",
     "server": "cross-env DB_ENV=testing nodemon index.js",
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
