@@ -9,7 +9,7 @@ const usersRoute = require("./routes/users/Users");
 const notificationsRoute = require("./routes/notifications/Notifications");
 const auth = require("./auth/auth");
 
-//const smsWorker = require("./twilio/Cron");
+const smsWorker = require("./twilio/Cron");
 
 const {
   checkLogin,
@@ -59,6 +59,6 @@ server.post("/auth/register", checkRegistration, hashPassword, (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
-//smsWorker.start();
+smsWorker.start();
 
 module.exports = server;
