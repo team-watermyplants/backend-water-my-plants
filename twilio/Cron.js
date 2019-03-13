@@ -6,7 +6,6 @@ const db = require("../data/dbConfig");
 const smsWorker = cron.schedule(
   "00 * * * * *",
   () => {
-    console.log("scheduler running");
     db("notifications as n")
       .join("plants as p", "n.plantId", "p.id")
       .join("users as u", "u.id", "p.userId")
