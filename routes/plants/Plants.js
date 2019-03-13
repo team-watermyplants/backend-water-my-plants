@@ -31,6 +31,7 @@ router.post("/", (req, res) => {
   } else {
     db("plants")
       .insert({ name, location, description, plantURL, userId })
+      .returning("*")
       .then(plant => res.status(201).json(plant))
       .catch(err => res.status(500).json(err));
   }
@@ -46,13 +47,14 @@ router.put("/:id", (req, res) => {
     db("plants")
       .where({ id: id })
       .update({ name, location, description, plantURL, userId })
+      .returning("*")
       .then(plant => {
         if (plant) {
           res.status(200).json(plant);
         } else if (!plant) {
-          res
-            .status(404)
-            .json({ message: "There isn't anything to update with that id." });
+          res.status(404).json({
+            message: "There isn't anything to update with that id."
+          });
         }
       })
       .catch(() => res.status(500).json({ message: "server error" }));
@@ -78,5 +80,20 @@ router.delete("/:id", (req, res) => {
     .catch(() => res.status(500).json({ message: "server error" }));
 });
 
-//all notifications for specific plant
+router.get("/:id/notifications", (req, res) => {
+  const { id } = req.params;
+  db("notifications")
+    .where({ plantId: id })
+    .then(notification => {
+      if (!notification) {
+        res
+          .status(400)
+          .json({ message: "There are no notifications with this user" });
+      } else {
+        res.status(200).json(notification);
+      }
+    })
+    .catch(err => res.status(err));
+});
+
 module.exports = router;
