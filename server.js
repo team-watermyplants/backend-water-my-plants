@@ -43,8 +43,10 @@ server.post(
 );
 
 server.post("/auth/register", checkRegistration, hashPassword, (req, res) => {
+  const { firstName, lastName, username, password, phoneNumber } = req.body;
   db("users")
-    .insert(req.body)
+    .insert({ firstName, lastName, username, password, phoneNumber })
+    .inserting("*")
     .then(user => {
       if (user) {
         let token = auth.generateToken(user);
