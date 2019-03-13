@@ -46,7 +46,7 @@ server.post("/auth/register", checkRegistration, hashPassword, (req, res) => {
   const { firstName, lastName, username, password, phoneNumber } = req.body;
   db("users")
     .insert({ firstName, lastName, username, password, phoneNumber })
-    .inserting("*")
+    .returning("*")
     .then(user => {
       if (user) {
         let token = auth.generateToken(user);
