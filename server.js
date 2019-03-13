@@ -35,9 +35,7 @@ server.post(
   async (req, res) => {
     if (req.user) {
       let token = auth.generateToken(req.user);
-      res
-        .status(200)
-        .json({ message: "Login Success", username: req.user.username, token });
+      res.status(200).json(req.user, token);
     }
   }
 );
@@ -51,7 +49,7 @@ server.post("/auth/register", checkRegistration, hashPassword, (req, res) => {
       if (user) {
         let token = auth.generateToken(user);
         res.status(201).json({
-          message: "Successfully created new user",
+          user,
           token
         });
       } else {
