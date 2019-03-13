@@ -35,7 +35,7 @@ server.post(
   async (req, res) => {
     if (req.user) {
       let token = auth.generateToken(req.user);
-      res.status(200).json(req.user, token);
+      res.status(200).json({ user: req.user, token });
     }
   }
 );
