@@ -83,7 +83,7 @@ router.get("/:id/plants", (req, res) => {
   db("plants")
     .where({ userId: id })
     .then(plant => {
-      if (!plant) {
+      if (plant.length === 0) {
         res.status(400).json({ message: "There are no plants with this user" });
       } else {
         res.status(200).json(plant);
@@ -97,7 +97,7 @@ router.get("/:id/notifications", (req, res) => {
   db("notifications")
     .where({ userId: id })
     .then(notification => {
-      if (!notification) {
+      if (notification.length === 0) {
         res
           .status(400)
           .json({ message: "There are no notifications with this user" });
