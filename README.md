@@ -19,6 +19,10 @@
     - [GET /api/plants/:id](#get-/api/plants/:id)
     - [POST /api/plants](#post-/api/plants)
     - [DELETE /api/plants/:id](#get-/api/plants/:id)
+    - [GET /api/notifications](#get-/api/notifications)
+    - [GET /api/notifications/:id](#get-/api/notifications/:id)
+    - [POST /api/notifications](#post-/api/notifications)
+    - [DELETE /api/notifications/:id](#get-/api/notifications/:id)
 - [✨ Tech Used ✨](#%E2%9C%A8-tech-used-%E2%9C%A8)
 - [Author](#author)
 
