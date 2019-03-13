@@ -7,12 +7,14 @@ exports.up = function(knex, Promise) {
       .integer("plantId")
       .references("id")
       .inTable("plants")
-      .onDelete("CASCADE");
+      .onDelete("CASCADE")
+      .notNullable();
     table
       .integer("userId")
       .references("id")
       .inTable("users")
-      .onDelete("CASCADE");
+      .onDelete("CASCADE")
+      .notNullable();
   });
 };
 
