@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", (req, res) => {
   const { id } = req.params;
   db("plants")
-    .where({ userId: id })
+    .where({ id })
     .then(plant => {
       if (plant.length === 0) {
         res
