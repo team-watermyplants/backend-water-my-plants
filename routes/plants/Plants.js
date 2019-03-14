@@ -13,7 +13,6 @@ router.get("/:id", (req, res) => {
   db("plants")
     .where({ id })
     .then(plant => {
-      console.log(plant)
       if (plant.length === 0) {
         res
           .status(400)
