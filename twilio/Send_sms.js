@@ -13,7 +13,7 @@ module.exports = {
           notification.location
         })`,
         from: process.env.TWILIO_NUMBER,
-        to: process.env.TEST_NUMBER
+        to: notification.phoneNumber
       })
       .then(message => console.log(message))
       .catch(err => console.error(err));
