@@ -1,21 +1,21 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-const auth = require("../../auth/auth");
-const db = require("../../data/dbConfig");
+const auth = require('../../auth/auth');
+const db = require('../../data/dbConfig');
 
-router.get("/", auth.authenticate, async (req, res) => {
-  let users = await db("users");
+router.get('/', auth.authenticate, async (req, res) => {
+  let users = await db('users');
   res.status(200).json(users);
 });
 
-router.get("/:id", (req, res) => {
+router.get('/:id', (req, res) => {
   const { id } = req.params;
-  db("users")
+  db('users')
     .where({ id: id })
     .then(user => {
       if (user.length === 0) {
-        res.status(404).json({ message: "There is no user with that id." });
+        res.status(404).json({ message: 'There is no user with that id.' });
       } else {
         res.status(200).json(user);
       }
@@ -23,7 +23,7 @@ router.get("/:id", (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
-router.put("/:id", (req, res) => {
+router.put('/:id', (req, res) => {
   const { id } = req.params;
   const {
     firstName,
@@ -31,13 +31,13 @@ router.put("/:id", (req, res) => {
     username,
     password,
     phoneNumber,
-    profileURL
+    profileURL,
   } = req.body;
 
   if (!firstName || !lastName || !username || !password || !phoneNumber) {
-    res.status(400).json({ message: "Please fill out all required fields." });
+    res.status(400).json({ message: 'Please fill out all required fields.' });
   } else {
-    db("users")
+    db('users')
       .where({ id: id })
       .update({
         firstName,
@@ -45,62 +45,62 @@ router.put("/:id", (req, res) => {
         username,
         password,
         phoneNumber,
-        profileURL
+        profileURL,
       })
-      .returning("*")
+      .returning('*')
       .then(user => {
         if (user) {
           res.status(200).json(user);
         } else {
           res.status(404).json({
-            message: "There isn't anything to update with that id."
+            message: "There isn't anything to update with that id.",
           });
         }
       })
-      .catch(() => res.status(500).json({ message: "server error" }));
+      .catch(() => res.status(500).json({ message: 'server error' }));
   }
 });
 
-router.delete("/:id", (req, res) => {
+router.delete('/:id', (req, res) => {
   const { id } = req.params;
-  db("users")
+  db('users')
     .where({ id: id })
     .del()
     .then(user => {
       if (!user) {
         res.status(400).json({
-          message: "There are no users to delete corresponding with that id."
+          message: 'There are no users to delete corresponding with that id.',
         });
       } else {
-        res.status(200).json({ message: "The user was successfully deleted." });
+        res.status(200).json({ message: 'The user was successfully deleted.' });
       }
     })
-    .catch(() => res.status(500).json({ message: "server error" }));
+    .catch(() => res.status(500).json({ message: 'server error' }));
 });
 
-router.get("/:id/plants", (req, res) => {
+router.get('/:id/plants', (req, res) => {
   const { id } = req.params;
-  db("plants")
+  db('plants')
     .where({ userId: id })
     .then(plant => {
-      if (plant.length === 0) {
-        res.status(400).json({ message: "There are no plants with this user" });
-      } else {
-        res.status(200).json(plant);
-      }
+      // if (plant.length === 0) {
+      //   res.status(400).json({ message: "There are no plants with this user" });
+      // } else {
+      res.status(200).json(plant);
+      // }
     })
     .catch(err => res.status(err));
 });
 
-router.get("/:id/notifications", (req, res) => {
+router.get('/:id/notifications', (req, res) => {
   const { id } = req.params;
-  db("notifications")
+  db('notifications')
     .where({ userId: id })
     .then(notification => {
       if (notification.length === 0) {
         res
           .status(400)
-          .json({ message: "There are no notifications with this user" });
+          .json({ message: 'There are no notifications with this user' });
       } else {
         res.status(200).json(notification);
       }
