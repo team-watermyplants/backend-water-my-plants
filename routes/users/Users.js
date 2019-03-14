@@ -77,7 +77,7 @@ router.delete('/:id', (req, res) => {
     })
     .catch(() => res.status(500).json({ message: 'server error' }));
 });
-
+// dke
 router.get('/:id/plants', (req, res) => {
   const { id } = req.params;
   db('plants')
