@@ -40,7 +40,7 @@ router.post("/", checkRegistration, hashPassword, async (req, res) => {
 
   res
     .status(201)
-    .json({ message: "Successfully created new user", id: ids[0], token });
+    .json({ message: "Successfully created new user", : ids[0], token, user });
 });
 
 module.exports = router;
