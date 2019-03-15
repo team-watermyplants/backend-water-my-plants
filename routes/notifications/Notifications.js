@@ -25,6 +25,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  console.log('\n REQ BODY', req.body);
   if (Array.isArray(req.body)) {
     db('notifications')
       .insert(req.body)
@@ -34,11 +35,9 @@ router.post('/', (req, res) => {
   } else {
     const { notificationTime, smsDelivered, plantId, userId } = req.body;
     if (!plantId || !userId) {
-      res
-        .status(400)
-        .json({
-          message: 'Please give the notification a plantId and userId.',
-        });
+      res.status(400).json({
+        message: 'Please give the notification a plantId and userId.',
+      });
     } else {
       db('notifications')
         .insert({ notificationTime, smsDelivered, plantId, userId })
