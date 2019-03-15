@@ -25,6 +25,13 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  if (Array.isArray(req.body)) {
+    db('notifications')
+      .insert(req.body)
+      .returning('*')
+      .then(notification => res.status(201).json(notification))
+      .catch(err => res.status(500).json(err));
+  }
   const { notificationTime, smsDelivered, plantId, userId } = req.body;
   if (!plantId || !userId) {
     res
