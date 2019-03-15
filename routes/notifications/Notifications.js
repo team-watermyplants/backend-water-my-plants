@@ -31,18 +31,21 @@ router.post('/', (req, res) => {
       .returning('*')
       .then(notification => res.status(201).json(notification))
       .catch(err => res.status(500).json(err));
-  }
-  const { notificationTime, smsDelivered, plantId, userId } = req.body;
-  if (!plantId || !userId) {
-    res
-      .status(400)
-      .json({ message: 'Please give the notification a plantId and userId.' });
   } else {
-    db('notifications')
-      .insert({ notificationTime, smsDelivered, plantId, userId })
-      .returning('*')
-      .then(notification => res.status(201).json(notification))
-      .catch(err => res.status(500).json(err));
+    const { notificationTime, smsDelivered, plantId, userId } = req.body;
+    if (!plantId || !userId) {
+      res
+        .status(400)
+        .json({
+          message: 'Please give the notification a plantId and userId.',
+        });
+    } else {
+      db('notifications')
+        .insert({ notificationTime, smsDelivered, plantId, userId })
+        .returning('*')
+        .then(notification => res.status(201).json(notification))
+        .catch(err => res.status(500).json(err));
+    }
   }
 });
 
