@@ -15,6 +15,8 @@
     "knex": "^0.16.3",
     "moment": "^2.24.0",
     "node-cron": "^2.0.3",
+    "passport": "^0.4.0",
+    "passport-github": "^1.1.0",
     "pg": "^7.8.2",
     "sqlite3": "^4.0.6",
     "twilio": "^3.29.1"
