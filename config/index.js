@@ -1,4 +1,4 @@
-// const cookieSession = require('./cookieSession')
+const cookieSession = require('./cookieSession')
 // const rateLimit = require('./rateLimit')
 const gitHubStrategy = require('./gitHubStrategy')
 // const googleStrategy = require('./googleStrategy')
@@ -7,7 +7,7 @@ const gitHubStrategy = require('./gitHubStrategy')
 const passportConfig = require('./passportConfig')
 
 module.exports = {
-  // cookieSession,
+  cookieSession,
   // rateLimit,
   gitHubStrategy,
   // googleStrategy,

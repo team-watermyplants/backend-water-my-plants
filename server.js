@@ -3,6 +3,7 @@ const path = require('path')
 const express = require('express')
 const helmet = require('helmet')
 const cors = require('cors')
+const cookieSession = require('cookie-session')
 const passport = require('passport')
 const server = express()
 const db = require('./data/dbConfig')
@@ -28,6 +29,7 @@ config.passportConfig(passport)
 server.use(cors())
 server.use(helmet())
 server.use(express.json())
+server.use(cookieSession(config.cookieSession))
 server.use(passport.initialize())
 server.use(passport.session())
 
@@ -83,7 +85,11 @@ server.get(
 )
 
 function socialLogin (req, res, next) {
-  res.redirect(`${process.env.CLIENT_URL}/users`)
+  const user = req.user
+  const token = auth.generateToken(user)
+  console.log('\n req.user', req.user)
+  req.session.token = token
+  res.redirect(process.env.CLIENT_URL)
 }
 
 // smsWorker.start();
