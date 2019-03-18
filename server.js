@@ -88,8 +88,10 @@ function socialLogin (req, res, next) {
   const user = req.user
   const token = auth.generateToken(user)
   console.log('\n req.user', req.user)
-  req.session.token = token
-  res.redirect(process.env.CLIENT_URL)
+  req.session = { token, user }
+  //? Send token in query string to save to localStorage on frontend?
+  //? Ask Luis what to do?
+  res.redirect(`${process.env.CLIENT_URL}/?token=${token}&userId=${user.id}`)
 }
 
 // smsWorker.start();
