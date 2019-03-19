@@ -34,7 +34,7 @@ function findOrCreate (newUser, done) {
       db('users')
         .insert(newUser)
         .returning('*')
-        .then(inserted => done(null, inserted))
+        .then(inserted => done(null, inserted[0]))
         .catch(err => done(err, false))
     }
   })

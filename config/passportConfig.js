@@ -9,7 +9,7 @@ module.exports = passport => {
       {
         clientID: config.gitHubStrategy.clientID,
         clientSecret: config.gitHubStrategy.clientSecret,
-        callbackURL: config.gitHubStrategy.callbackURL
+        // callbackURL: config.gitHubStrategy.callbackURL
       },
       config.gitHubStrategy.verifyCallback
     )
