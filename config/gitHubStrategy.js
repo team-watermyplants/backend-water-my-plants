@@ -4,7 +4,7 @@ const db = require('../data/dbConfig')
 module.exports = {
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: process.env.GITHUB_CB,
+  // callbackURL: process.env.GITHUB_CB,
   verifyCallback: (accessToken, refreshToken, profile, done) => {
     const {
       id: githubId,
