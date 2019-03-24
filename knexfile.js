@@ -1,27 +1,27 @@
-require("dotenv").config();
+require('dotenv').config()
 module.exports = {
   development: {
-    client: "pg",
+    client: 'pg',
     connection: process.env.DATABASE_URL,
     migrations: {
-      directory: "./data/migrations"
+      directory: './data/migrations',
     },
     seeds: {
-      directory: "./data/seeds"
+      directory: './data/seeds',
     },
     useNullAsDefault: true,
-    debug: true
+    debug: true,
   },
   production: {
-    client: "pg",
+    client: 'pg',
     connection: `${process.env.DATABASE_URL}?ssl=true`,
     migrations: {
-      directory: "./data/migrations"
+      directory: './data/migrations',
     },
     seeds: {
-      directory: "./data/seeds"
+      directory: './data/seeds',
     },
     useNullAsDefault: true,
-    debug: true
-  }
-};
+    debug: true,
+  },
+}

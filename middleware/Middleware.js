@@ -1,9 +1,8 @@
-require("dotenv").config();
+require('dotenv').config()
 
-const bcrypt = require("bcryptjs");
+const bcrypt = require('bcryptjs')
 
-const db = require("../data/dbConfig");
-const auth = require("../auth/auth");
+const db = require('../data/dbConfig')
 
 //REGISTRATION MIDDLEWARE
 
@@ -17,9 +16,9 @@ function checkRegistration(req, res, next) {
   ) {
     res
       .status(400)
-      .json({ message: "Please enter information for all required fields." });
+      .json({ message: 'Please enter information for all required fields.' })
   } else {
-    next();
+    next()
   }
 }
 
@@ -27,40 +26,40 @@ function hashPassword(req, res, next) {
   req.body.password = bcrypt.hashSync(
     req.body.password,
     Number(process.env.HASH_ROUNDS)
-  );
-  next();
+  )
+  next()
 }
 
 //LOGIN MIDDLEWARE
 
 function checkLogin(req, res, next) {
   if (req.body.username && req.body.password) {
-    next();
+    next()
   } else {
-    res.status(400).json({ message: "Please enter a username and password." });
+    res.status(400).json({ message: 'Please enter a username and password.' })
   }
 }
 
 async function findUser(req, res, next) {
-  let user = await db("users")
+  let user = await db('users')
     .where({ username: req.body.username })
-    .first();
+    .first()
 
   if (!user) {
     res
       .status(404)
-      .json({ message: "Can't find that username in our database" });
+      .json({ message: "Can't find that username in our database" })
   } else {
-    req.user = user;
-    next();
+    req.user = user
+    next()
   }
 }
 
 function checkPassword(req, res, next) {
   if (req.user && bcrypt.compareSync(req.body.password, req.user.password)) {
-    next();
+    next()
   } else {
-    res.status(401).json({ message: "Incorrect password" });
+    res.status(401).json({ message: 'Incorrect password' })
   }
 }
 
@@ -69,5 +68,5 @@ module.exports = {
   checkLogin,
   checkPassword,
   findUser,
-  hashPassword
-};
+  hashPassword,
+}
