@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const db = require('../data/dbConfig')
+const db = require('../data/db')
 
 router.get('/', async (req, res) => {
   let plants = await db('plants')

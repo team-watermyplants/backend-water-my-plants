@@ -1,5 +1,5 @@
 require('dotenv').config()
-const db = require('../data/dbConfig')
+const db = require('../data/db')
 
 module.exports = {
   clientID: process.env.GITHUB_CLIENT_ID,
@@ -26,19 +26,16 @@ module.exports = {
 }
 
 //* Signature from Sequelize ORM
-function findOrCreate(newUser, done) {
-  db('users')
-    .where({ username: newUser.username })
-    .first()
-    .then(user => {
-      if (user && user.id) {
-        return done(null, user)
-      } else {
-        db('users')
-          .insert(newUser)
-          .returning('*')
-          .then(inserted => done(null, inserted[0]))
-          .catch(err => done(err, false))
-      }
-    })
+function findOrCreate (newUser, done) {
+  db('users').where({ username: newUser.username }).first().then(user => {
+    if (user && user.id) {
+      return done(null, user)
+    } else {
+      db('users')
+        .insert(newUser)
+        .returning('*')
+        .then(inserted => done(null, inserted[0]))
+        .catch(err => done(err, false))
+    }
+  })
 }

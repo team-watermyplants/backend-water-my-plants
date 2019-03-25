@@ -1,17 +1,15 @@
 const cookieSession = require('./cookieSession')
-// const rateLimit = require('./rateLimit')
+const rateLimit = require('./rateLimit')
+const corsWhitelistWithCredentials = require('./corsWhitelistWithCredentials')
 const gitHubStrategy = require('./gitHubStrategy')
-// const googleStrategy = require('./googleStrategy')
-// const facebookStrategy = require('./facebookStrategy')
-// const corsWhitelistWithCredentials = require('./corsWhitelistWithCredentials')
-const passportConfig = require('./passportConfig')
+const googleStrategy = require('./googleStrategy')
+const facebookStrategy = require('./facebookStrategy')
 
 module.exports = {
   cookieSession,
-  // rateLimit,
+  rateLimit,
   gitHubStrategy,
-  // googleStrategy,
-  // facebookStrategy,
-  // corsWhitelistWithCredentials,
-  passportConfig
+  googleStrategy,
+  facebookStrategy,
+  corsWhitelistWithCredentials,
 }

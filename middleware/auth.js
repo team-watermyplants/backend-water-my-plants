@@ -2,11 +2,11 @@ require('dotenv').config()
 
 const bcrypt = require('bcryptjs')
 
-const db = require('../data/dbConfig')
+const db = require('../data/db')
 
 //REGISTRATION MIDDLEWARE
 
-function checkRegistration(req, res, next) {
+function checkRegistration (req, res, next) {
   if (
     !req.body.username ||
     !req.body.firstName ||
@@ -22,7 +22,7 @@ function checkRegistration(req, res, next) {
   }
 }
 
-function hashPassword(req, res, next) {
+function hashPassword (req, res, next) {
   req.body.password = bcrypt.hashSync(
     req.body.password,
     Number(process.env.HASH_ROUNDS)
@@ -32,7 +32,7 @@ function hashPassword(req, res, next) {
 
 //LOGIN MIDDLEWARE
 
-function checkLogin(req, res, next) {
+function checkLogin (req, res, next) {
   if (req.body.username && req.body.password) {
     next()
   } else {
@@ -40,10 +40,8 @@ function checkLogin(req, res, next) {
   }
 }
 
-async function findUser(req, res, next) {
-  let user = await db('users')
-    .where({ username: req.body.username })
-    .first()
+async function findUser (req, res, next) {
+  let user = await db('users').where({ username: req.body.username }).first()
 
   if (!user) {
     res
@@ -55,7 +53,7 @@ async function findUser(req, res, next) {
   }
 }
 
-function checkPassword(req, res, next) {
+function checkPassword (req, res, next) {
   if (req.user && bcrypt.compareSync(req.body.password, req.user.password)) {
     next()
   } else {

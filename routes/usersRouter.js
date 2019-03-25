@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
+const db = require('../data/db')
 
-const auth = require('../auth/auth')
-const db = require('../data/dbConfig')
+const { authenticate } = require('../helpers')
 
-router.get('/', auth.authenticate, async (req, res) => {
+router.get('/', authenticate, async (req, res) => {
   let users = await db('users')
   res.status(200).json(users)
 })
